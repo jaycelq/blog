@@ -4,7 +4,7 @@ require "stringex"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
-ssh_user       = "root@192.241.193.104"
+ssh_user       = "root@liqiang.me"
 ssh_port       = "22"
 document_root  = "/opt/lampp/htdocs/octopress"
 rsync_delete   = false
@@ -114,6 +114,7 @@ task :new_post, :title do |t, args|
     post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
     post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
     post.puts "comments: true"
+    post.puts "sharing: false"
     post.puts "categories: "
     post.puts "---"
   end
@@ -149,7 +150,7 @@ task :new_page, :filename do |t, args|
       page.puts "title: \"#{title}\""
       page.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M')}"
       page.puts "comments: true"
-      page.puts "sharing: true"
+      page.puts "sharing: false"
       page.puts "footer: true"
       page.puts "---"
     end
