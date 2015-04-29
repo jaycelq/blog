@@ -108,10 +108,7 @@ module Jekyll
       if self.layouts.key? 'category_index'
         dir = self.config['category_dir'] || 'categories'
         self.categories.keys.each do |category|
-          cate_dir =  category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase
-          cate_dir = URI::escape(cate_dir)
-          cate_dir = URI::parse(cate_dir)
-          cate_dir = cate_dir.to_s
+          cate_dir = category.to_url
           self.write_category_index(File.join(dir, cate_dir), category)
         end
 
@@ -177,7 +174,8 @@ ERR
     #
     def category_link(category)
       dir = @context.registers[:site].config['category_dir']
-      "<a class='category' href='/#{dir}/#{category.to_url}/'>#{category}</a>"
+      category_name = category.capitalize 
+      "<a class='category' href='/#{dir}/#{category.to_url}/'>#{category_name}</a>"
     end
 
     # Outputs the post.date as formatted html, with hooks for CSS styling.
